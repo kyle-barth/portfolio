@@ -596,10 +596,29 @@ video {
 	--tw-backdrop-sepia: var(--tw-empty,/*!*/ /*!*/);
 	--tw-backdrop-filter: var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);
 }
-.text-5xl {
-	font-size: 3rem;
+.absolute {
+	position: absolute;
+}
+.z-0 {
+	z-index: 0;
+}
+.z-10 {
+	z-index: 10;
+}
+.resize {
+	resize: both;
+}
+.p-10 {
+	padding: 2.5rem;
+}
+.text-6xl {
+	font-size: 3.75rem;
 	line-height: 1;
 }
 .font-extrabold {
 	font-weight: 800;
+}
+.text-gray-200 {
+	--tw-text-opacity: 1;
+	color: rgba(229, 231, 235, var(--tw-text-opacity));
 }
