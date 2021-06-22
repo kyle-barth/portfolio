@@ -1,5 +1,5 @@
 {
-	"name": "~TODO~",
+	"name": "portfolio",
 	"version": "0.0.1",
 	"scripts": {
 		"dev:only": "svelte-kit dev",

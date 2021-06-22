@@ -1,51 +1,56 @@
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import * as THREE from 'three';
-	import oc from 'three-orbit-controls';
+	import { fly } from 'svelte/transition';
+	import { slide } from '../animations/slide';
+	import Desk from '../components/desk.svelte';
 
-	let el: HTMLCanvasElement;
+	import SVGButton from '../components/SVGButton.svelte';
 
-	onMount(() => {
-		const scene = new THREE.Scene();
-		const camera = new THREE.PerspectiveCamera(
-			50,
-			window.innerWidth / window.innerHeight,
-			0.1,
-			1000
-		);
-		const OrbitControls = oc(THREE);
+	import TailwindSVG from '../icons/tailwind.svg.svelte';
+	import ThreeSVG from '../icons/three.svg.svelte';
+	import SvelteSVG from '../icons/svelte.svg.svelte';
+	import TypeScriptSVG from '../icons/typescript.svg.svelte';
 
-		const geometry = new THREE.TorusGeometry(2, 1, 16, 100);
-		const material = new THREE.MeshBasicMaterial({ color: 'lightblue', wireframe: true });
-		const donut = new THREE.Mesh(geometry, material);
-		scene.add(donut);
-		
-		let renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el });
-		const controls = new OrbitControls(camera, renderer.domElement);		
+	import Rightarrow from '../icons/rightarrow.svg.svelte';
 
-		camera.position.z = 10;
-
-		const animate = () => {
-			requestAnimationFrame(animate);
-			donut.rotation.x += 0.01;
-			donut.rotation.y += 0.01;
-			controls.update();
-			renderer.render(scene, camera);
-		};
-
-		const resize = () => {
-			renderer.setSize(window.innerWidth, window.innerHeight);
-			camera.aspect = window.innerWidth / window.innerHeight;
-			camera.updateProjectionMatrix();
-		};
-
-		resize();
-		animate();
-
-		window.addEventListener('resize', resize);
-	});
+	let loaded: boolean = false;
 </script>
 
-<canvas class="absolute z-0" bind:this={el} />
+<Desk bind:loaded />
 
-<h1 class="absolute text-gray-200 text-6xl font-extrabold p-10 z-10">Hi.</h1>
+{#if loaded}
+	<div
+		class="absolute flex justify-end z-50 w-1/2 p-10 text-gray-200 h-full bg-gray-600 glassmorphic"
+		in:fly={slide}
+	>
+		<div class="max-w-xl flex flex-col justify-between">
+			<div>
+				<h1 class="text-6xl font-extrabold">Hi. 🚀</h1>
+				<p class="text-lg">
+					Lorem ipsum dolor sit amet consectetur adipisicing elit. Veniam cum sed ad, et labore,
+					sint vel nisi iure consectetur explicabo beatae soluta laudantium perspiciatis! Architecto
+					rerum voluptate eaque neque impedit.
+				</p>
+			</div>
+
+			<div>
+				<h3 class="text-xl font-extrabold pb-5 flex items-center">
+					Made with some cool stuff
+					<Rightarrow />
+				</h3>
+				<div class="flex justify-between">
+					<SVGButton svgIcon={TailwindSVG} url="https://tailwindcss.com/" />
+					<SVGButton svgIcon={ThreeSVG} url="https://threejs.org/" />
+					<SVGButton svgIcon={SvelteSVG} url="https://kit.svelte.dev/" />
+					<SVGButton svgIcon={TypeScriptSVG} url="https://www.typescriptlang.org/" />
+				</div>
+			</div>
+		</div>
+	</div>
+{/if}
+
+<style lang="postcss">
+	/*   only works on chrome :(   */
+	.glassmorphic {
+		@apply backdrop-filter backdrop-blur-xl bg-opacity-30;
+	}
+</style>
