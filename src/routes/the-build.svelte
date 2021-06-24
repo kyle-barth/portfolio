@@ -41,7 +41,7 @@
 		<img
 			class="sm:w-1/2 sm:self-end sm:pr-5 sm:pb-0"
 			alt="Screenshot of 3D application blender"
-			src="src/assets/screenshots/blender.png"
+			src="/screenshots/blender.png"
 		/>
 		<div class="flex items-center pb-10 sm:pb-0">
 			<div class="flex">
@@ -91,7 +91,7 @@
 		<img
 			class="sm:w-1/2 sm:pl-5 self-center"
 			alt="Screenshot of 3D application blender"
-			src="src/assets/screenshots/dependencies.png"
+			src="/screenshots/dependencies.png"
 		/>
 	</div>
 
@@ -99,7 +99,7 @@
 		<img
 			class="sm:w-1/2 sm:self-end sm:mr-5 border-2"
 			alt="Screenshot of 3D application blender"
-			src="src/assets/screenshots/site.png"
+			src="/screenshots/site.png"
 		/>
 		<div class="flex items-center pb-5 sm:pb-0">
 			<div class="flex">

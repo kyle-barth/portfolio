@@ -64,7 +64,7 @@
 		};
 
 		loader.load(
-			'src/assets/desk.gltf',
+			'/desk.gltf',
 			// called when the resource is loaded
 			(gltf) => {
 				loaded = true;
