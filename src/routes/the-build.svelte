@@ -43,6 +43,7 @@
 			alt="Screenshot of 3D application blender"
 			src="/screenshots/blender.png"
 		/>
+
 		<div class="flex items-center pb-10 sm:pb-0">
 			<div class="flex">
 				<h1 class="h1 pr-5">1</h1>
@@ -79,8 +80,8 @@
 					<Link
 						str="GitHub"
 						url="https://github.com/mrdoob/three.js/blob/dev/examples/jsm/loaders/GLTFLoader.js"
-					/>, and I added it to the src directory of my project as <Code str="GLTFLoader.js" />. I
-					then changed the import to be
+					/>, and I added it to the src directory of my project as <Code str="GLTFLoader.ts" />. I
+					then changed the import in GLTFLoader to be
 					<Code str="from 'three'" />. This was a work around for this
 					<Link str="error" url="https://github.com/manuelbieh/geolib/issues/208" />. Hopefully this
 					gets fixed soon! Now simply import your loader, don't forget to destructure it!
@@ -88,6 +89,7 @@
 				<Code str={"import { GLTFLoader } from '../GLTFLoader'"} />
 			</div>
 		</div>
+
 		<img
 			class="sm:w-1/2 sm:pl-5 self-center"
 			alt="Screenshot of 3D application blender"
@@ -101,14 +103,20 @@
 			alt="Screenshot of 3D application blender"
 			src="/screenshots/site.png"
 		/>
+
 		<div class="flex items-center pb-5 sm:pb-0">
 			<div class="flex">
 				<h1 class="h1 pr-5">3</h1>
 				<div class="flex flex-col max-w-md">
 					<p class="pb-5">
 						Finally, it's time to actually put our scene on the page. To do this we have to remember
-						that three.js relies on running client side as it references a HTMLCanvasElement in the
-						DOM you want three to render it's cool 3D scene to.
+						that three.js relies on running client side as it references a canvas in the DOM. The
+						canvas is then updated by a self calling function (the animation loop) using <Code
+							str="requestAnimationFrame()"
+						/> to render it's cool 3D scene to. To find out why we do this, I highly recommend this <Link
+							str="talk"
+							url="https://www.youtube.com/watch?v=cCOL7MC4Pl0"
+						/>.
 					</p>
 					<p class="pb-5">
 						Nothing a simple <Code str="onMount()" /> can't solve! Then for loading your scene, I followed

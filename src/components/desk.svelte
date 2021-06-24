@@ -18,6 +18,7 @@
 	let resetControls = () => {};
 
 	onMount(() => {
+		// @ts-ignore
 		const loader = new GLTFLoader();
 		const scene = new THREE.Scene();
 
@@ -37,7 +38,7 @@
 			controls.reset();
 		};
 
-		const ambientlight = new THREE.AmbientLight(0x404040, 5);
+		const ambientLight = new THREE.AmbientLight(0x404040, 5);
 
 		const clearLights = () => {
 			scene.children
@@ -52,15 +53,15 @@
 
 			if (str) {
 				resetControls();
-				scene.add(ambientlight);
+				scene.add(ambientLight);
 				return;
 			}
 
 			const randomColor: string = Math.floor(Math.random() * 16777215).toString(16);
 			const randomIntensity: number = Math.ceil(Math.random() * 10);
-			const pointlight = new THREE.PointLight(`#${randomColor}`, randomIntensity, 100);
-			pointlight.position.set(0, 50, 0);
-			scene.add(pointlight);
+			const pointLight = new THREE.PointLight(`#${randomColor}`, randomIntensity, 100);
+			pointLight.position.set(0, 50, 0);
+			scene.add(pointLight);
 		};
 
 		loader.load(
@@ -121,7 +122,7 @@
 			on:click={() => genLighting()}
 			class="text-gray-400 font-mono cursor-pointer focus:outline-none flex items-center hover:underline"
 		>
-			randomise lighting
+			randomize lighting
 			<Lightbulb />
 		</button>
 
