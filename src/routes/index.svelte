@@ -40,7 +40,13 @@
 				</div>
 
 				<div>
-					<a href="build" class="hover:underline">
+					<a href="skills" class="hover:underline">
+						<h3 class="text-xl font-extrabold pb-5 flex items-center">
+							Tools I've worked with
+							<Rightarrow />
+						</h3>
+					</a>
+					<a href="the-build" class="hover:underline">
 						<h3 class="text-xl font-extrabold pb-5 flex items-center">
 							Find out how this site was made / link to boiler plate repo
 							<Rightarrow />
