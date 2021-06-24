@@ -24,7 +24,7 @@
 		let renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el });
 
 		const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
-		camera.position.set(-55, 55, 55);
+		camera.position.set(-55, 25, 55);
 		const OrbitControls = oc(THREE);
 		const controls = new OrbitControls(camera, renderer.domElement);
 		controls.maxDistance = 125;
@@ -67,9 +67,7 @@
 			'src/assets/desk.gltf',
 			// called when the resource is loaded
 			(gltf) => {
-				setTimeout(() => {
-					loaded = true;
-				}, 750);
+				loaded = true;
 
 				genLighting('reset');
 				scene.add(gltf.scene);
@@ -90,9 +88,6 @@
 				animate();
 
 				window.addEventListener('resize', resize);
-
-				el.classList.add('opacity-100');
-				el.classList.add('scale-100');
 			},
 			// called while loading is progressing
 			(xhr) => {},
@@ -100,17 +95,28 @@
 			(error) => {}
 		);
 	});
+
+	let delay: boolean = false;
+	$: {
+		if (loaded) {
+			setTimeout(() => {
+				delay = true;
+			}, 750);
+		}
+	}
 </script>
 
 <div class="absolute overflow-hidden">
 	<canvas
-		class="transform translate-x-1/5 transition-all duration-700 scale-0 opacity-0"
+		class={loaded
+			? 'canvas sm:translate-x-[20%] scale-100 opacity-100'
+			: 'canvas sm:translate-x-[20%] scale-0 opacity-0'}
 		bind:this={el}
 	/>
 </div>
 
-{#if loaded}
-	<div in:fly={slideL} class="absolute left-1/2 p-10 flex items-center">
+{#if delay}
+	<div in:fly={slideL} class="p-5 sm:left-1/2 sm:p-10 absolute flex items-center">
 		<button
 			on:click={() => genLighting()}
 			class="text-gray-400 font-mono cursor-pointer focus:outline-none flex items-center hover:underline"
@@ -129,3 +135,9 @@
 		</button>
 	</div>
 {/if}
+
+<style lang="postcss">
+	.canvas {
+		@apply transform transition-all duration-700;
+	}
+</style>

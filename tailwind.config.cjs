@@ -1,4 +1,4 @@
 module.exports = {
-	// mode: 'jit', // one buggy boi
+	mode: 'jit',
 	purge: ['./src/**/*.svelte']
 };

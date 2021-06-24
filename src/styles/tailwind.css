@@ -2,6 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.translate-x-1\/5 {
-	--tw-translate-x: 20%;
+.h1 {
+	@apply text-6xl font-extrabold;
 }

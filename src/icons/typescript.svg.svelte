@@ -1,8 +1,4 @@
-<script lang="ts">
-	export let size: number = 20;
-</script>
-
-<svg class={`h-${size} w-${size}`} fill="none" version="1.1" viewBox="0 0 512 512">
+<svg class="h-20 w-20" fill="none" version="1.1" viewBox="0 0 512 512">
 	<title>TypeScript logo</title>
 	<rect width="512" height="512" rx="50" fill="#3178c6" />
 	<path

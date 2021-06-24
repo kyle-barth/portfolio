@@ -1,9 +1,5 @@
-<script lang="ts">
-	export let size: number = 20;
-</script>
-
 <svg
-	class={`h-${size} w-${size} gray-`}
+	class="h-20 w-20"
 	xmlns="http://www.w3.org/2000/svg"
 	xmlns:xlink="http://www.w3.org/1999/xlink"
 	version="1.1"
