@@ -8,6 +8,7 @@
 
 	import { slideL } from '../animations/slide';
 	import Divider from './divider.svelte';
+	import Loading from './loading.svelte';
 
 	import Lightbulb from '../icons/lightbuld.svg.svelte';
 
@@ -107,6 +108,10 @@
 	}
 </script>
 
+{#if !loaded}
+	<Loading />
+{/if}
+
 <div class="absolute overflow-hidden">
 	<canvas
 		class={loaded
@@ -139,6 +144,6 @@
 
 <style lang="postcss">
 	.canvas {
-		@apply transform transition-all duration-700;
+		@apply transform transition-all duration-700 z-0;
 	}
 </style>

@@ -592,6 +592,12 @@ video {
 .absolute {
 	position: absolute;
 }
+.inset-0 {
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+	left: 0px;
+}
 .bottom-0 {
 	bottom: 0px;
 }
@@ -608,20 +614,26 @@ video {
 .mt-24 {
 	margin-top: 6rem;
 }
+.-ml-1 {
+	margin-left: -0.25rem;
+}
+.mr-3 {
+	margin-right: 0.75rem;
+}
 .flex {
 	display: flex;
 }
 .h-1 {
 	height: 0.25rem;
 }
+.h-20 {
+	height: 5rem;
+}
 .h-8 {
 	height: 2rem;
 }
 .h-10 {
 	height: 2.5rem;
-}
-.h-20 {
-	height: 5rem;
 }
 .h-3\/5 {
 	height: 60%;
@@ -657,6 +669,22 @@ video {
 .transform {
 	transform: var(--tw-transform);
 }
+@-webkit-keyframes spin {
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+@keyframes spin {
+
+	to {
+		transform: rotate(360deg);
+	}
+}
+.animate-spin {
+	-webkit-animation: spin 1s linear infinite;
+	        animation: spin 1s linear infinite;
+}
 .cursor-pointer {
 	cursor: pointer;
 }
@@ -680,6 +708,9 @@ video {
 }
 .justify-end {
 	justify-content: flex-end;
+}
+.justify-center {
+	justify-content: center;
 }
 .justify-between {
 	justify-content: space-between;
@@ -717,6 +748,9 @@ video {
 .px-5 {
 	padding-left: 1.25rem;
 	padding-right: 1.25rem;
+}
+.pt-5 {
+	padding-top: 1.25rem;
 }
 .pl-2 {
 	padding-left: 0.5rem;
@@ -766,6 +800,10 @@ video {
 	--tw-text-opacity: 1;
 	color: rgba(59, 130, 246, var(--tw-text-opacity));
 }
+.text-white {
+	--tw-text-opacity: 1;
+	color: rgba(255, 255, 255, var(--tw-text-opacity));
+}
 .underline {
 	text-decoration: underline;
 }
@@ -774,6 +812,12 @@ video {
 }
 .opacity-0 {
 	opacity: 0;
+}
+.opacity-25 {
+	opacity: 0.25;
+}
+.opacity-75 {
+	opacity: 0.75;
 }
 .filter {
 	filter: var(--tw-filter);
@@ -791,6 +835,9 @@ video {
 	transition-property: all;
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 	transition-duration: 150ms;
+}
+.duration-700 {
+	transition-duration: 700ms;
 }
 
 .h1 {
@@ -851,15 +898,19 @@ video {
 		padding: 2.5rem;
 	}
 
+	.sm\:pt-0 {
+		padding-top: 0px;
+	}
+
+	.sm\:pl-5 {
+		padding-left: 1.25rem;
+	}
+
 	.sm\:pr-5 {
 		padding-right: 1.25rem;
 	}
 
 	.sm\:pb-0 {
 		padding-bottom: 0px;
-	}
-
-	.sm\:pl-5 {
-		padding-left: 1.25rem;
 	}
 }
