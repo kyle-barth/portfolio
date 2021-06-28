@@ -110,20 +110,17 @@
 				<div class="flex flex-col max-w-md">
 					<p class="pb-5">
 						Finally, it's time to actually put our scene on the page. To do this we have to remember
-						that three.js relies on running client side as it references a canvas in the DOM. The
-						canvas is then updated by a self calling function (the animation loop) using <Code
-							str="requestAnimationFrame()"
-						/> to render it's cool 3D scene to. To find out why we do this, I highly recommend this <Link
-							str="talk"
-							url="https://www.youtube.com/watch?v=cCOL7MC4Pl0"
-						/>.
-					</p>
-					<p class="pb-5">
-						Nothing a simple <Code str="onMount()" /> can't solve! Then for loading your scene, I followed
-						this nice <Link
+						that three.js relies on running client side as it references a canvas element in the
+						DOM. Nothing a simple <Code str="onMount()" /> can't solve! Then for loading your scene,
+						I followed this nice <Link
 							str="post"
 							url="https://redstapler.co/add-3d-model-to-website-threejs/"
 						/>.
+					</p>
+					<p class="pb-5">
+						The canvas is then updated periodically by a self calling function (the animation loop)
+						using <Code str="requestAnimationFrame()" />. To find out why we do this, I highly
+						recommend this <Link str="talk" url="https://www.youtube.com/watch?v=cCOL7MC4Pl0" />.
 					</p>
 					<p class="pb-5">
 						The rest is nothing more than fancy <Link
