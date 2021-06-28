@@ -23,6 +23,19 @@
 		const loader = new GLTFLoader();
 		const scene = new THREE.Scene();
 
+		loader.load(
+			'/desk.gltf',
+			// called when the resource is loaded
+			(gltf) => {
+				loaded = true;
+				scene.add(gltf.scene);
+			},
+			// called while loading is progressing
+			(xhr) => {},
+			// called when loading has errors
+			(error) => {}
+		);
+
 		let renderer = new THREE.WebGLRenderer({ antialias: true, canvas: el });
 
 		const camera = new THREE.PerspectiveCamera(50, window.innerWidth / window.innerHeight, 1, 1000);
@@ -40,7 +53,6 @@
 		};
 
 		const ambientLight = new THREE.AmbientLight(0x404040, 5);
-
 		const clearLights = () => {
 			scene.children
 				.filter((o) => o.type !== 'Group')
@@ -48,7 +60,6 @@
 					scene.remove(o);
 				});
 		};
-
 		genLighting = (str?: string) => {
 			clearLights();
 
@@ -65,37 +76,22 @@
 			scene.add(pointLight);
 		};
 
-		loader.load(
-			'/desk.gltf',
-			// called when the resource is loaded
-			(gltf) => {
-				loaded = true;
+		const animate = () => {
+			requestAnimationFrame(animate);
+			controls.update();
+			renderer.render(scene, camera);
+		};
 
-				genLighting('reset');
-				scene.add(gltf.scene);
+		const resize = () => {
+			renderer.setSize(window.innerWidth, window.innerHeight);
+			camera.aspect = window.innerWidth / window.innerHeight;
+			camera.updateProjectionMatrix();
+		};
+		window.addEventListener('resize', resize);
 
-				const animate = () => {
-					requestAnimationFrame(animate);
-					controls.update();
-					renderer.render(scene, camera);
-				};
-
-				const resize = () => {
-					renderer.setSize(window.innerWidth, window.innerHeight);
-					camera.aspect = window.innerWidth / window.innerHeight;
-					camera.updateProjectionMatrix();
-				};
-
-				resize();
-				animate();
-
-				window.addEventListener('resize', resize);
-			},
-			// called while loading is progressing
-			(xhr) => {},
-			// called when loading has errors
-			(error) => {}
-		);
+		genLighting('reset');
+		resize();
+		animate();
 	});
 
 	let delay: boolean = false;
