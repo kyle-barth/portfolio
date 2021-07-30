@@ -35,7 +35,10 @@
 		>
 			<div class="sm:max-w-xl flex flex-col justify-between">
 				<div>
-					<h1 class="h1">Hi. 🚀</h1>
+					<div class="flex flex-row align-middle">
+						<img src="/rocket.ico" alt="Rocket Icon" class="h-16"> 
+						<h1 class="h1 pl-4">Hi.</h1>
+					</div>
 					<p class="text-lg">I'm Kyle. I am a passionate Full Stack Web Dev. Welcome to my site!</p>
 				</div>
 
