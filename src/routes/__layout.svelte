@@ -5,7 +5,8 @@
 
 <slot />
 
-<!-- <Seo /> -->
+<Seo />
+
 <style lang="postcss">
 	:global(*) {
 		@apply font-sfPro text-white;
