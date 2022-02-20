@@ -1,10 +1,14 @@
 <script lang="ts">
 	import { page } from '$app/stores';
+	import { onMount } from 'svelte';
 
 	let path;
-	$: {
-		path = $page.url.pathname.replace('/', '');
-	}
+
+	onMount(() => {
+		page.subscribe((page) => {
+			path = page.url.pathname.replace('/', '');
+		});
+	});
 </script>
 
 <svelte:head>
