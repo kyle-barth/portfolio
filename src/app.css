@@ -1,0 +1,11 @@
+/* Write your global styles here, in PostCSS syntax */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	@font-face {
+		font-family: 'SF-Pro';
+		src: local('SF-Pro'), url('/fonts/sf-pro.woff2') format('woff2');
+	}
+}

@@ -1,4 +1,15 @@
-module.exports = {
-	mode: 'jit',
-	purge: ['./src/**/*.svelte']
+const config = {
+	content: ['./src/**/*.{html,js,svelte,ts}'],
+
+	theme: {
+		extend: {
+			fontFamily: {
+				sfPro: ['SF-Pro']
+			}
+		}
+	},
+
+	plugins: []
 };
+
+module.exports = config;
