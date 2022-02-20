@@ -1,7 +1,6 @@
 <script lang="ts">
 	import Cards from '$lib/components/Cards.svelte';
 	import Container from '$lib/components/layout/Container.svelte';
-	import { fade } from 'svelte/transition';
 </script>
 
 <Container fade={true}>
