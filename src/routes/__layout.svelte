@@ -1,9 +1,18 @@
-<script lang="ts">
-	import '../styles/tailwind-output.css';
+<script>
+	import Seo from '$lib/components/seo/Seo.svelte';
+	import '../app.css';
 </script>
 
-<svelte:head>
-	<title>kyle-barth</title>
-</svelte:head>
-
 <slot />
+
+<Seo />
+
+<style lang="postcss">
+	:global(*) {
+		@apply font-sfPro text-white;
+	}
+	:global(.glassmorphic) {
+		/*   only works on chrome :(   */
+		@apply backdrop-blur-xl backdrop-filter;
+	}
+</style>
