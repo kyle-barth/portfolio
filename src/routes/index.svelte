@@ -1,75 +1,69 @@
 <script lang="ts">
 	import { fly } from 'svelte/transition';
-	import { fade } from 'svelte/transition';
+	import Lightbulb from '$lib/components/icons/Lightbulb.svelte';
+	import Scene from '$lib/components/scene/Scene.svelte';
+	import { camera } from '$lib/store/camera';
+	import { deskLoaded } from '$lib/store/deskLoaded';
+	import { slideL, slideR } from '$lib/animations/slide';
+	import { light } from '$lib/store/light';
 
-	import { slide } from '../animations/slide';
+	let loaded = false;
 
-	import Desk from '../components/desk.svelte';
-	import SVGButton from '../components/SVGButton.svelte';
-
-	import TailwindSVG from '../icons/tailwind.svg.svelte';
-	import ThreeSVG from '../icons/three.svg.svelte';
-	import SvelteSVG from '../icons/svelte.svg.svelte';
-	import TypeScriptSVG from '../icons/typescript.svg.svelte';
-	import Rightarrow from '../icons/rightarrow.svg.svelte';
-
-	let loaded: boolean = false;
-	let delay: boolean = false;
+	function reset() {
+		camera.reset();
+		light.reset();
+	}
 
 	$: {
-		if (loaded) {
+		if ($deskLoaded) {
 			setTimeout(() => {
-				delay = true;
+				loaded = true;
 			}, 750);
 		}
 	}
 </script>
 
-<div out:fade>
-	<Desk bind:loaded />
-
-	{#if delay}
-		<div
-			class="h-3/5 bottom-0 p-5 sm:w-1/2 sm:h-full sm:p-10 absolute flex justify-end z-50 text-gray-200 bg-gray-600 glassmorphic"
-			in:fly={slide}
-		>
-			<div class="sm:max-w-xl flex flex-col justify-between">
-				<div>
-					<div class="flex flex-row align-middle">
-						<img src="/rocket.ico" alt="Rocket Icon" class="h-16"> 
-						<h1 class="h1 pl-4">Hi.</h1>
-					</div>
-					<p class="text-lg">I'm Kyle. I am a passionate Full Stack Web Dev. Welcome to my site!</p>
-				</div>
-
-				<div>
-					<a href="skills" class="hover:underline">
-						<h3 class="text-xl font-extrabold pb-5 flex items-center">
-							Tools I've worked with
-							<Rightarrow />
-						</h3>
-					</a>
-					<a href="the-build" class="hover:underline">
-						<h3 class="text-xl font-extrabold pb-5 flex items-center">
-							Find out how this site was made / link to boiler plate repo
-							<Rightarrow />
-						</h3>
-					</a>
-					<div class="flex justify-between">
-						<SVGButton svgIcon={TailwindSVG} url="https://tailwindcss.com/" />
-						<SVGButton svgIcon={ThreeSVG} url="https://threejs.org/" />
-						<SVGButton svgIcon={SvelteSVG} url="https://kit.svelte.dev/" />
-						<SVGButton svgIcon={TypeScriptSVG} url="https://www.typescriptlang.org/" />
-					</div>
-				</div>
+{#if loaded}
+	<div
+		in:fly={slideR}
+		class="glassmorphic absolute left-0 bottom-0 z-10 flex h-1/2 w-full flex-col justify-between bg-gray-900 bg-opacity-50 p-5 sm:h-full sm:w-1/2 sm:p-10"
+	>
+		<div class="max-w-lg self-end">
+			<div class="relative right-0 flex items-center pb-5">
+				<img src="/rocket.ico" alt="Rocket Icon" class="h-[4rem] sm:h-20" />
+				<h1 class="pl-4 text-6xl sm:text-8xl">Hi.</h1>
 			</div>
+			<p class="text-xl sm:text-2xl">
+				I'm Kyle, a passionate Full Stack Web Dev based in london. Welcome to my site!
+			</p>
 		</div>
-	{/if}
-</div>
+
+		<div class="flex w-full flex-col text-right">
+			<a href="/portfolio">portfolio &rarr;</a>
+			<a href="/skillset">tooling / skillset &rarr;</a>
+		</div>
+	</div>
+
+	<div
+		in:fly={slideL}
+		class="camera-controls absolute left-0 z-10 flex items-center p-5 sm:left-1/2 sm:right-0 sm:w-1/2 sm:p-10 "
+	>
+		<button class="flex items-center font-mono text-gray-400 hover:underline" on:click={light.rand}
+			>randomize lighting
+			<Lightbulb /></button
+		>
+		<span class="px-5">|</span>
+		<button class="font-mono hover:underline" on:click={reset}>reset</button>
+	</div>
+{/if}
+
+<Scene />
 
 <style lang="postcss">
-	/*   only works on chrome :(   */
-	.glassmorphic {
-		@apply backdrop-filter backdrop-blur-xl bg-opacity-30;
+	:global(.camera-controls *) {
+		@apply text-zinc-400;
+	}
+	a {
+		@apply text-2xl hover:underline;
 	}
 </style>
