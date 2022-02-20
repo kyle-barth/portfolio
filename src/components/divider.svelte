@@ -1,1 +1,0 @@
-<span class="px-5 text-gray-200">|</span>
