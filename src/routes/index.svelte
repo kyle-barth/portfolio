@@ -24,36 +24,38 @@
 </script>
 
 {#if loaded}
-	<div
-		in:fly={slideR}
-		class="glassmorphic absolute left-0 bottom-0 z-10 flex h-1/2 w-full flex-col justify-between bg-gray-900 bg-opacity-50 p-5 sm:h-full sm:w-1/2 sm:p-10"
-	>
-		<div class="max-w-lg self-end">
-			<div class="relative right-0 flex items-center pb-5">
-				<img src="/rocket.ico" alt="Rocket Icon" class="h-[4rem] sm:h-20" />
-				<h1 class="pl-4 text-6xl sm:text-8xl">Hi.</h1>
-			</div>
-			<p class="text-xl sm:text-2xl">
-				I'm Kyle, a passionate Full Stack Web Dev based in london. Welcome to my site!
-			</p>
-		</div>
-
-		<div class="flex w-full flex-col text-right">
-			<a href="/portfolio">portfolio &rarr;</a>
-			<a href="/skillset">tooling / skillset &rarr;</a>
-		</div>
-	</div>
-
-	<div
-		in:fly={slideL}
-		class="camera-controls absolute left-0 z-10 flex items-center p-5 sm:left-1/2 sm:right-0 sm:w-1/2 sm:p-10 "
-	>
-		<button class="flex items-center font-mono text-gray-400 hover:underline" on:click={light.rand}
-			>randomize lighting
-			<Lightbulb /></button
+	<div class="absolute top-0 left-0 h-screen w-screen overflow-x-hidden">
+		<div
+			in:fly={slideR}
+			class="glassmorphic absolute left-0 bottom-0 z-10 flex h-1/2 w-full flex-col justify-between bg-gray-900 bg-opacity-50 p-5 sm:h-full sm:w-1/2 sm:p-10"
 		>
-		<span class="px-5">|</span>
-		<button class="font-mono hover:underline" on:click={reset}>reset</button>
+			<div class="max-w-lg self-end">
+				<div class="relative right-0 flex items-center pb-5">
+					<img src="/rocket.ico" alt="Rocket Icon" class="h-[4rem] sm:h-20" />
+					<h1 class="pl-4 text-6xl sm:text-8xl">Hi.</h1>
+				</div>
+				<p class="text-xl sm:text-2xl">
+					I'm Kyle, a passionate Full Stack Web Dev based in london. Welcome to my site!
+				</p>
+			</div>
+
+			<div class="flex w-full flex-col text-right">
+				<a href="/portfolio">portfolio &rarr;</a>
+				<a href="/skillset">tooling / skillset &rarr;</a>
+			</div>
+		</div>
+
+		<div
+			in:fly={slideL}
+			class="camera-controls absolute left-0 z-10 flex items-center p-5 sm:left-1/2 sm:right-0 sm:w-1/2 sm:p-10 "
+		>
+			<button class="glassmorphic" on:click={light.rand}
+				>randomize lighting
+				<Lightbulb /></button
+			>
+			<span class="px-5">|</span>
+			<button class="glassmorphic" on:click={reset}>reset</button>
+		</div>
 	</div>
 {/if}
 
@@ -65,5 +67,8 @@
 	}
 	a {
 		@apply text-2xl hover:underline;
+	}
+	button {
+		@apply flex h-10 items-center rounded-lg border-2 border-white border-opacity-10 bg-gray-900 bg-opacity-50 px-1 font-mono hover:border-opacity-20 hover:bg-opacity-70 active:border-opacity-50 active:bg-opacity-100;
 	}
 </style>
