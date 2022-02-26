@@ -35,7 +35,7 @@
 <div class="flex flex-wrap pt-10">
 	{#each portfolioCards as portfolioCard, i}
 		<div class={i === portfolioCards.length - 1 ? 'card' : 'card mb-10'}>
-			<a class="z-10" href={portfolioCard.url}>
+			<a class="z-10" href={portfolioCard.url} target="_blank">
 				<img
 					class="-z-50 transition-all sm:hover:scale-105"
 					src={portfolioCard.img.url}
@@ -46,7 +46,9 @@
 			<div class="z-30 bg-gray-800 p-5">
 				<div class="flex flex-row items-center justify-between pb-5 text-3xl">
 					<h1>{portfolioCard.name}</h1>
-					<a class="button glassmorphic text-lg" href={portfolioCard.url}>link &rarr;</a>
+					<a class="button glassmorphic text-lg" href={portfolioCard.url} target="_blank"
+						>link &rarr;</a
+					>
 				</div>
 
 				<p>
