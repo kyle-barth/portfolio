@@ -69,6 +69,6 @@
 		@apply text-2xl hover:underline;
 	}
 	button {
-		@apply flex h-10 items-center rounded-lg border-2 border-white border-opacity-10 bg-gray-900 bg-opacity-50 px-1 font-mono hover:border-opacity-20 hover:bg-opacity-70 active:border-opacity-50 active:bg-opacity-100;
+		@apply flex items-center font-mono hover:underline;
 	}
 </style>
