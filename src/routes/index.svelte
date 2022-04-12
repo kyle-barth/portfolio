@@ -34,7 +34,7 @@
 					<img src="/rocket.ico" alt="Rocket Icon" class="h-[4rem] sm:h-20" />
 					<h1 class="pl-4 text-6xl sm:text-8xl">Hi.</h1>
 				</div>
-				<p class="text-xl sm:text-2xl">
+				<p class="text-lg sm:text-2xl">
 					I'm Kyle, a passionate Full Stack Web Dev based in london. Welcome to my site!
 				</p>
 			</div>

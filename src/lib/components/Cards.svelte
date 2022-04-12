@@ -1,5 +1,6 @@
 <script lang="ts">
 	import type { PortfolioCard } from '$lib/types/PortfolioCard';
+	import Image from './image.svelte';
 
 	const portfolioCards: PortfolioCard[] = [
 		{
@@ -36,8 +37,10 @@
 	{#each portfolioCards as portfolioCard, i}
 		<div class={i === portfolioCards.length - 1 ? 'card' : 'card mb-10'}>
 			<a class="z-10" href={portfolioCard.url} target="_blank">
-				<img
-					class="-z-50 transition-all sm:hover:scale-105"
+				<Image
+					width="724px"
+					height="452.5px"
+					classes="-z-50 transition-all sm:hover:scale-105"
 					src={portfolioCard.img.url}
 					alt={portfolioCard.img.alt}
 				/>

@@ -21,7 +21,6 @@ var __spreadValues = (a, b) => {
   return a;
 };
 var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
-var __markAsModule = (target) => __defProp(target, "__esModule", { value: true });
 var __esm = (fn, res) => function __init() {
   return fn && (res = (0, fn[__getOwnPropNames(fn)[0]])(fn = 0)), res;
 };
@@ -29,22 +28,16 @@ var __export = (target, all) => {
   for (var name in all)
     __defProp(target, name, { get: all[name], enumerable: true });
 };
-var __reExport = (target, module2, copyDefault, desc) => {
-  if (module2 && typeof module2 === "object" || typeof module2 === "function") {
-    for (let key2 of __getOwnPropNames(module2))
-      if (!__hasOwnProp.call(target, key2) && (copyDefault || key2 !== "default"))
-        __defProp(target, key2, { get: () => module2[key2], enumerable: !(desc = __getOwnPropDesc(module2, key2)) || desc.enumerable });
+var __copyProps = (to, from, except, desc) => {
+  if (from && typeof from === "object" || typeof from === "function") {
+    for (let key2 of __getOwnPropNames(from))
+      if (!__hasOwnProp.call(to, key2) && key2 !== except)
+        __defProp(to, key2, { get: () => from[key2], enumerable: !(desc = __getOwnPropDesc(from, key2)) || desc.enumerable });
   }
-  return target;
+  return to;
 };
-var __toESM = (module2, isNodeMode) => {
-  return __reExport(__markAsModule(__defProp(module2 != null ? __create(__getProtoOf(module2)) : {}, "default", !isNodeMode && module2 && module2.__esModule ? { get: () => module2.default, enumerable: true } : { value: module2, enumerable: true })), module2);
-};
-var __toCommonJS = /* @__PURE__ */ ((cache) => {
-  return (module2, temp) => {
-    return cache && cache.get(module2) || (temp = __reExport(__markAsModule({}), module2, 1), cache && cache.set(module2, temp), temp);
-  };
-})(typeof WeakMap !== "undefined" ? /* @__PURE__ */ new WeakMap() : 0);
+var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__getProtoOf(mod)) : {}, __copyProps(isNodeMode || !mod || !mod.__esModule ? __defProp(target, "default", { value: mod, enumerable: true }) : target, mod));
+var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 var __accessCheck = (obj, member, msg) => {
   if (!member.has(obj))
     throw TypeError("Cannot " + msg);
@@ -901,7 +894,7 @@ function fixResponseChunkedTransferBadEnding(request, errorCallback) {
     });
   });
 }
-function __fetch_polyfill() {
+function installFetch() {
   Object.defineProperties(globalThis, {
     fetch: {
       enumerable: true,
@@ -5414,7 +5407,7 @@ var init_install_fetch = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-5ea7dcbd.js
+// .svelte-kit/output/server/chunks/index-c4568e5c.js
 function noop2() {
 }
 function run(fn) {
@@ -5476,6 +5469,9 @@ function getContext(key2) {
 function escape2(html) {
   return String(html).replace(/["'&<>]/g, (match) => escaped[match]);
 }
+function escape_attribute_value(value) {
+  return typeof value === "string" ? escape2(value) : value;
+}
 function each(items, fn) {
   let str = "";
   for (let i2 = 0; i2 < items.length; i2 += 1) {
@@ -5528,38 +5524,13 @@ function create_ssr_component(fn) {
 function add_attribute(name, value, boolean) {
   if (value == null || boolean && !value)
     return "";
-  return ` ${name}${value === true && boolean_attributes.has(name) ? "" : `=${typeof value === "string" ? JSON.stringify(escape2(value)) : `"${value}"`}`}`;
+  const assignment = boolean && value === true ? "" : `="${escape_attribute_value(value.toString())}"`;
+  return ` ${name}${assignment}`;
 }
-var current_component, boolean_attributes, escaped, missing_component, on_destroy;
-var init_index_5ea7dcbd = __esm({
-  ".svelte-kit/output/server/chunks/index-5ea7dcbd.js"() {
+var current_component, escaped, missing_component, on_destroy;
+var init_index_c4568e5c = __esm({
+  ".svelte-kit/output/server/chunks/index-c4568e5c.js"() {
     Promise.resolve();
-    boolean_attributes = /* @__PURE__ */ new Set([
-      "allowfullscreen",
-      "allowpaymentrequest",
-      "async",
-      "autofocus",
-      "autoplay",
-      "checked",
-      "controls",
-      "default",
-      "defer",
-      "disabled",
-      "formnovalidate",
-      "hidden",
-      "ismap",
-      "loop",
-      "multiple",
-      "muted",
-      "nomodule",
-      "novalidate",
-      "open",
-      "playsinline",
-      "readonly",
-      "required",
-      "reversed",
-      "selected"
-    ]);
     escaped = {
       '"': "&quot;",
       "'": "&#39;",
@@ -5573,15 +5544,54 @@ var init_index_5ea7dcbd = __esm({
   }
 });
 
+// .svelte-kit/output/server/chunks/hooks-1c45ba0b.js
+var hooks_1c45ba0b_exports = {};
+var init_hooks_1c45ba0b = __esm({
+  ".svelte-kit/output/server/chunks/hooks-1c45ba0b.js"() {
+  }
+});
+
 // .svelte-kit/output/server/entries/pages/__layout.svelte.js
 var layout_svelte_exports = {};
 __export(layout_svelte_exports, {
   default: () => _layout
 });
-var css, _layout;
+var getStores, page, Seo, css, _layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/__layout.svelte.js"() {
-    init_index_5ea7dcbd();
+    init_index_c4568e5c();
+    getStores = () => {
+      const stores = getContext("__svelte__");
+      return {
+        page: {
+          subscribe: stores.page.subscribe
+        },
+        navigating: {
+          subscribe: stores.navigating.subscribe
+        },
+        get preloading() {
+          console.error("stores.preloading is deprecated; use stores.navigating instead");
+          return {
+            subscribe: stores.navigating.subscribe
+          };
+        },
+        session: stores.session,
+        updated: stores.updated
+      };
+    };
+    page = {
+      subscribe(fn) {
+        const store = getStores().page;
+        return store.subscribe(fn);
+      }
+    };
+    Seo = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let $$unsubscribe_page;
+      $$unsubscribe_page = subscribe(page, (value) => value);
+      let title = "";
+      $$unsubscribe_page();
+      return `${$$result.head += `<meta name="${"description"}" content="${"Kyle Barth - Web Developer - Portfoilio website."}" data-svelte="svelte-15nas9y">${$$result.title = `<title>kyle-barth ${escape2(title)}</title>`, ""}`, ""}`;
+    });
     css = {
       code: "*{font-family:SF-Pro;--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity))}.glassmorphic{--tw-backdrop-blur:blur(24px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}",
       map: null
@@ -5590,7 +5600,7 @@ var init_layout_svelte = __esm({
       $$result.css.add(css);
       return `${slots.default ? slots.default({}) : ``}
 
-`;
+${validate_component(Seo, "Seo").$$render($$result, {}, {}, {})}`;
     });
   }
 });
@@ -5607,13 +5617,13 @@ var entry, js, css2;
 var init__ = __esm({
   ".svelte-kit/output/server/nodes/0.js"() {
     init_layout_svelte();
-    entry = "pages/__layout.svelte-bf821b81.js";
-    js = ["pages/__layout.svelte-bf821b81.js", "chunks/vendor-f856dcc3.js"];
-    css2 = ["assets/pages/__layout.svelte-6cdc2d85.css", "assets/vendor-63b1e0e2.css"];
+    entry = "pages/__layout.svelte-afad1ccb.js";
+    js = ["pages/__layout.svelte-afad1ccb.js", "chunks/index-e3e25309.js"];
+    css2 = ["assets/pages/__layout.svelte-27b1cea4.css"];
   }
 });
 
-// .svelte-kit/output/server/entries/pages/error.svelte.js
+// .svelte-kit/output/server/entries/fallbacks/error.svelte.js
 var error_svelte_exports = {};
 __export(error_svelte_exports, {
   default: () => Error2,
@@ -5624,8 +5634,8 @@ function load({ error: error2, status }) {
 }
 var Error2;
 var init_error_svelte = __esm({
-  ".svelte-kit/output/server/entries/pages/error.svelte.js"() {
-    init_index_5ea7dcbd();
+  ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
+    init_index_c4568e5c();
     Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { status } = $$props;
       let { error: error2 } = $$props;
@@ -5657,9 +5667,9 @@ var entry2, js2, css3;
 var init__2 = __esm({
   ".svelte-kit/output/server/nodes/1.js"() {
     init_error_svelte();
-    entry2 = "error.svelte-a12cfdaa.js";
-    js2 = ["error.svelte-a12cfdaa.js", "chunks/vendor-f856dcc3.js"];
-    css3 = ["assets/vendor-63b1e0e2.css"];
+    entry2 = "error.svelte-fa0d1566.js";
+    js2 = ["error.svelte-fa0d1566.js", "chunks/index-e3e25309.js"];
+    css3 = [];
   }
 });
 
@@ -26512,8 +26522,8 @@ var init_three_module = __esm({
                 return response.text();
               } else {
                 const re = /charset="?([^;"\s]*)"?/i;
-                const exec = re.exec(mimeType);
-                const label = exec && exec[1] ? exec[1].toLowerCase() : void 0;
+                const exec2 = re.exec(mimeType);
+                const label = exec2 && exec2[1] ? exec2[1].toLowerCase() : void 0;
                 const decoder = new TextDecoder(label);
                 return response.arrayBuffer().then((ab) => decoder.decode(ab));
               }
@@ -33199,7 +33209,7 @@ function lightStore() {
 var Lightbulb, ROOT, PARENT, css$2, Canvas, position, rotation, scale, Primitive, PerspectiveCamera_1, OrbitControls_1, AmbientLight2, PointLight2, subscriber_queue2, deskLoaded, Desk, initCameraPos, camera, Camera2, initValue, genRandColor, genRandIntensity, light, Lighting, css$1, Scene2, css4, Routes;
 var init_index_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/index.svelte.js"() {
-    init_index_5ea7dcbd();
+    init_index_c4568e5c();
     init_three_module();
     init_three_module();
     init_OrbitControls();
@@ -33769,7 +33779,7 @@ ${validate_component(PointLight2, "SC.PointLight").$$render($$result, {
 </div>`;
     });
     css4 = {
-      code: ".camera-controls *{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity))\n}a.svelte-1tjoeml{font-size:1.5rem;line-height:2rem\n}a.svelte-1tjoeml:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline\n}",
+      code: '.camera-controls *{--tw-text-opacity:1;color:rgb(161 161 170 / var(--tw-text-opacity))\n}a.svelte-674pvp{font-size:1.5rem;line-height:2rem\n}a.svelte-674pvp:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline\n}button.svelte-674pvp{display:flex;align-items:center;font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace\n}button.svelte-674pvp:hover{-webkit-text-decoration-line:underline;text-decoration-line:underline\n}',
       map: null
     };
     Routes = create_ssr_component(($$result, $$props, $$bindings, slots) => {
@@ -33787,18 +33797,18 @@ ${validate_component(PointLight2, "SC.PointLight").$$render($$result, {
         }
       }
       $$unsubscribe_deskLoaded();
-      return `${loaded ? `<div class="${"glassmorphic absolute left-0 bottom-0 z-10 flex h-1/2 w-full flex-col justify-between bg-gray-900 bg-opacity-50 p-5 sm:h-full sm:w-1/2 sm:p-10"}"><div class="${"max-w-lg self-end"}"><div class="${"relative right-0 flex items-center pb-5"}"><img src="${"/rocket.ico"}" alt="${"Rocket Icon"}" class="${"h-[4rem] sm:h-20"}">
-				<h1 class="${"pl-4 text-6xl sm:text-8xl"}">Hi.</h1></div>
-			<p class="${"text-xl sm:text-2xl"}">I&#39;m Kyle, a passionate Full Stack Web Dev based in london. Welcome to my site!
-			</p></div>
+      return `${loaded ? `<div class="${"absolute top-0 left-0 h-screen w-screen overflow-x-hidden"}"><div class="${"glassmorphic absolute left-0 bottom-0 z-10 flex h-1/2 w-full flex-col justify-between bg-gray-900 bg-opacity-50 p-5 sm:h-full sm:w-1/2 sm:p-10"}"><div class="${"max-w-lg self-end"}"><div class="${"relative right-0 flex items-center pb-5"}"><img src="${"/rocket.ico"}" alt="${"Rocket Icon"}" class="${"h-[4rem] sm:h-20"}">
+					<h1 class="${"pl-4 text-6xl sm:text-8xl"}">Hi.</h1></div>
+				<p class="${"text-lg sm:text-2xl"}">I&#39;m Kyle, a passionate Full Stack Web Dev based in london. Welcome to my site!
+				</p></div>
 
-		<div class="${"flex w-full flex-col text-right"}"><a href="${"/portfolio"}" class="${"svelte-1tjoeml"}">portfolio \u2192</a>
-			<a href="${"/skillset"}" class="${"svelte-1tjoeml"}">tooling / skillset \u2192</a></div></div>
+			<div class="${"flex w-full flex-col text-right"}"><a href="${"/portfolio"}" class="${"svelte-674pvp"}">portfolio \u2192</a>
+				<a href="${"/skillset"}" class="${"svelte-674pvp"}">tooling / skillset \u2192</a></div></div>
 
-	<div class="${"camera-controls absolute left-0 z-10 flex items-center p-5 sm:left-1/2 sm:right-0 sm:w-1/2 sm:p-10 "}"><button class="${"flex items-center font-mono text-gray-400 hover:underline"}">randomize lighting
-			${validate_component(Lightbulb, "Lightbulb").$$render($$result, {}, {}, {})}</button>
-		<span class="${"px-5"}">|</span>
-		<button class="${"font-mono hover:underline"}">reset</button></div>` : ``}
+		<div class="${"camera-controls absolute left-0 z-10 flex items-center p-5 sm:left-1/2 sm:right-0 sm:w-1/2 sm:p-10 "}"><button class="${"glassmorphic svelte-674pvp"}">randomize lighting
+				${validate_component(Lightbulb, "Lightbulb").$$render($$result, {}, {}, {})}</button>
+			<span class="${"px-5"}">|</span>
+			<button class="${"glassmorphic svelte-674pvp"}">reset</button></div></div>` : ``}
 
 ${validate_component(Scene2, "Scene").$$render($$result, {}, {}, {})}`;
     });
@@ -33817,17 +33827,17 @@ var entry3, js3, css5;
 var init__3 = __esm({
   ".svelte-kit/output/server/nodes/2.js"() {
     init_index_svelte();
-    entry3 = "pages/index.svelte-cfae79de.js";
-    js3 = ["pages/index.svelte-cfae79de.js", "chunks/vendor-f856dcc3.js"];
-    css5 = ["assets/pages/index.svelte-9876b9fe.css", "assets/vendor-63b1e0e2.css"];
+    entry3 = "pages/index.svelte-2de3b5c6.js";
+    js3 = ["pages/index.svelte-2de3b5c6.js", "chunks/index-e3e25309.js", "chunks/index-10c503ec.js", "chunks/index-643b1cd2.js"];
+    css5 = ["assets/pages/index.svelte-718a935f.css"];
   }
 });
 
-// .svelte-kit/output/server/chunks/Container-0e98fdc7.js
+// .svelte-kit/output/server/chunks/Container-70e2743f.js
 var css6, Container;
-var init_Container_0e98fdc7 = __esm({
-  ".svelte-kit/output/server/chunks/Container-0e98fdc7.js"() {
-    init_index_5ea7dcbd();
+var init_Container_70e2743f = __esm({
+  ".svelte-kit/output/server/chunks/Container-70e2743f.js"() {
+    init_index_c4568e5c();
     css6 = {
       code: ".container.svelte-1mtz99z{margin:auto;max-width:48rem;padding-top:1.25rem;padding-bottom:1.25rem;padding-left:1.25rem;padding-right:1.25rem\n}@media(min-width: 640px){.container.svelte-1mtz99z{padding-top:5rem;padding-bottom:5rem\n    }}",
       map: null
@@ -33850,8 +33860,8 @@ __export(portfolio_svelte_exports, {
 var css$12, Cards, css7, Portfolio;
 var init_portfolio_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/portfolio.svelte.js"() {
-    init_index_5ea7dcbd();
-    init_Container_0e98fdc7();
+    init_index_c4568e5c();
+    init_Container_70e2743f();
     css$12 = {
       code: ".card.svelte-789dby{display:flex;flex-direction:column;overflow:hidden;border-radius:0.75rem;border-width:2px;--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity));--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)\n}.button.svelte-789dby{border-radius:0.375rem;border-width:2px;--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity));background-color:rgb(255 255 255 / var(--tw-bg-opacity));--tw-bg-opacity:0.2;padding-left:0.5rem;padding-right:0.5rem\n}.button.svelte-789dby:hover{--tw-bg-opacity:0.3\n}",
       map: null
@@ -33888,10 +33898,10 @@ var init_portfolio_svelte = __esm({
       ];
       $$result.css.add(css$12);
       return `<div class="${"flex flex-wrap pt-10"}">${each(portfolioCards, (portfolioCard, i2) => {
-        return `<div class="${escape2(null_to_empty(i2 === portfolioCards.length - 1 ? "card" : "card mb-10")) + " svelte-789dby"}"><a class="${"z-10"}"${add_attribute("href", portfolioCard.url, 0)}><img class="${"-z-50 transition-all sm:hover:scale-105"}"${add_attribute("src", portfolioCard.img.url, 0)}${add_attribute("alt", portfolioCard.img.alt, 0)}></a>
+        return `<div class="${escape2(null_to_empty(i2 === portfolioCards.length - 1 ? "card" : "card mb-10")) + " svelte-789dby"}"><a class="${"z-10"}"${add_attribute("href", portfolioCard.url, 0)} target="${"_blank"}"><img${add_attribute("id", "img" + i2, 0)} width="${"724px"}" height="${"452.5px"}" decoding="${"async"}" class="${"-z-50 opacity-0 transition-all sm:hover:scale-105"}"${add_attribute("src", (() => portfolioCard.img.url)(), 0)}${add_attribute("alt", portfolioCard.img.alt, 0)}></a>
 
 			<div class="${"z-30 bg-gray-800 p-5"}"><div class="${"flex flex-row items-center justify-between pb-5 text-3xl"}"><h1>${escape2(portfolioCard.name)}</h1>
-					<a class="${"button glassmorphic text-lg svelte-789dby"}"${add_attribute("href", portfolioCard.url, 0)}>link \u2192</a></div>
+					<a class="${"button glassmorphic text-lg svelte-789dby"}"${add_attribute("href", portfolioCard.url, 0)} target="${"_blank"}">link \u2192</a></div>
 
 				<p>${escape2(portfolioCard.desc)}
 				</p></div>
@@ -33931,9 +33941,9 @@ var entry4, js4, css8;
 var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     init_portfolio_svelte();
-    entry4 = "pages/portfolio.svelte-5e96f8d3.js";
-    js4 = ["pages/portfolio.svelte-5e96f8d3.js", "chunks/vendor-f856dcc3.js", "chunks/Container-e8105eeb.js"];
-    css8 = ["assets/pages/portfolio.svelte-e91076aa.css", "assets/vendor-63b1e0e2.css", "assets/Container-3f760c47.css"];
+    entry4 = "pages/portfolio.svelte-43a48a7f.js";
+    js4 = ["pages/portfolio.svelte-43a48a7f.js", "chunks/index-e3e25309.js", "chunks/Container-ee799066.js", "chunks/index-10c503ec.js"];
+    css8 = ["assets/pages/portfolio.svelte-e91076aa.css", "assets/Container-3f760c47.css"];
   }
 });
 
@@ -33945,8 +33955,8 @@ __export(skillset_svelte_exports, {
 var css9, Skillset;
 var init_skillset_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/skillset.svelte.js"() {
-    init_index_5ea7dcbd();
-    init_Container_0e98fdc7();
+    init_index_c4568e5c();
+    init_Container_70e2743f();
     css9 = {
       code: ".spacing.svelte-1j159lx .svelte-1j159lx{padding-bottom:1.25rem\n}h2.svelte-1j159lx.svelte-1j159lx{font-size:1.25rem;line-height:1.75rem;font-weight:700\n}h3.svelte-1j159lx.svelte-1j159lx{font-size:1.125rem;line-height:1.75rem;font-weight:700\n}ul.svelte-1j159lx.svelte-1j159lx{list-style-position:inside;list-style-type:disc;padding-bottom:0.5rem\n}li.svelte-1j159lx.svelte-1j159lx{padding-left:1.25rem\n}",
       map: null
@@ -34016,9 +34026,9 @@ var entry5, js5, css10;
 var init__5 = __esm({
   ".svelte-kit/output/server/nodes/4.js"() {
     init_skillset_svelte();
-    entry5 = "pages/skillset.svelte-3081eee6.js";
-    js5 = ["pages/skillset.svelte-3081eee6.js", "chunks/vendor-f856dcc3.js", "chunks/Container-e8105eeb.js"];
-    css10 = ["assets/pages/skillset.svelte-ba3c6654.css", "assets/vendor-63b1e0e2.css", "assets/Container-3f760c47.css"];
+    entry5 = "pages/skillset.svelte-5f9127eb.js";
+    js5 = ["pages/skillset.svelte-5f9127eb.js", "chunks/index-e3e25309.js", "chunks/Container-ee799066.js", "chunks/index-10c503ec.js"];
+    css10 = ["assets/pages/skillset.svelte-ba3c6654.css", "assets/Container-3f760c47.css"];
   }
 });
 
@@ -34027,10 +34037,11 @@ var entry_exports = {};
 __export(entry_exports, {
   default: () => entry_default
 });
+module.exports = __toCommonJS(entry_exports);
 
 // .svelte-kit/vercel-tmp/shims.js
 init_install_fetch();
-__fetch_polyfill();
+installFetch();
 
 // node_modules/@sveltejs/kit/dist/node.js
 var import_stream = require("stream");
@@ -34103,8 +34114,8 @@ async function setResponse(res, response) {
   }
 }
 
-// .svelte-kit/output/server/app.js
-init_index_5ea7dcbd();
+// .svelte-kit/output/server/index.js
+init_index_c4568e5c();
 var __accessCheck2 = (obj, member, msg) => {
   if (!member.has(obj))
     throw TypeError("Cannot " + msg);
@@ -34134,7 +34145,7 @@ function afterUpdate() {
 }
 var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   let { stores } = $$props;
-  let { page } = $$props;
+  let { page: page2 } = $$props;
   let { components } = $$props;
   let { props_0 = null } = $$props;
   let { props_1 = null } = $$props;
@@ -34143,8 +34154,8 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   afterUpdate(stores.page.notify);
   if ($$props.stores === void 0 && $$bindings.stores && stores !== void 0)
     $$bindings.stores(stores);
-  if ($$props.page === void 0 && $$bindings.page && page !== void 0)
-    $$bindings.page(page);
+  if ($$props.page === void 0 && $$bindings.page && page2 !== void 0)
+    $$bindings.page(page2);
   if ($$props.components === void 0 && $$bindings.components && components !== void 0)
     $$bindings.components(components);
   if ($$props.props_0 === void 0 && $$bindings.props_0 && props_0 !== void 0)
@@ -34154,7 +34165,7 @@ var Root = create_ssr_component(($$result, $$props, $$bindings, slots) => {
   if ($$props.props_2 === void 0 && $$bindings.props_2 && props_2 !== void 0)
     $$bindings.props_2(props_2);
   {
-    stores.page.set(page);
+    stores.page.set(page2);
   }
   return `
 
@@ -34258,7 +34269,11 @@ async function render_endpoint(event, mod) {
     handler = mod.get;
   }
   if (!handler) {
-    return;
+    return event.request.headers.get("x-sveltekit-load") ? new Response(void 0, {
+      status: 204
+    }) : new Response("Method not allowed", {
+      status: 405
+    });
   }
   const response = await handler(event);
   const preface = `Invalid response from route ${event.url.pathname}`;
@@ -34266,7 +34281,7 @@ async function render_endpoint(event, mod) {
     return error(`${preface}: expected an object, got ${typeof response}`);
   }
   if (response.fallthrough) {
-    return;
+    throw new Error("fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching");
   }
   const { status = 200, body = {} } = response;
   const headers = response.headers instanceof Headers ? new Headers(response.headers) : to_headers(response.headers);
@@ -34570,44 +34585,35 @@ function writable(value, start = noop3) {
 function coalesce_to_error(err) {
   return err instanceof Error || err && err.name && err.message ? err : new Error(JSON.stringify(err));
 }
-var escape_json_in_html_dict = {
+var render_json_payload_script_dict = {
   "<": "\\u003C",
-  ">": "\\u003E",
-  "/": "\\u002F",
   "\u2028": "\\u2028",
   "\u2029": "\\u2029"
 };
-var escape_json_in_html_regex = new RegExp(`[${Object.keys(escape_json_in_html_dict).join("")}]`, "g");
-function escape_json_in_html(val) {
-  return JSON.stringify(val).replace(escape_json_in_html_regex, (match) => escape_json_in_html_dict[match]);
-}
-function escape3(str, dict, unicode_encoder) {
-  let result = "";
-  for (let i2 = 0; i2 < str.length; i2 += 1) {
-    const char = str.charAt(i2);
-    const code = char.charCodeAt(0);
-    if (char in dict) {
-      result += dict[char];
-    } else if (code >= 55296 && code <= 57343) {
-      const next = str.charCodeAt(i2 + 1);
-      if (code <= 56319 && next >= 56320 && next <= 57343) {
-        result += char + str[++i2];
-      } else {
-        result += unicode_encoder(code);
-      }
-    } else {
-      result += char;
-    }
+var render_json_payload_script_regex = new RegExp(`[${Object.keys(render_json_payload_script_dict).join("")}]`, "g");
+function render_json_payload_script(attrs, payload) {
+  const safe_payload = JSON.stringify(payload).replace(render_json_payload_script_regex, (match) => render_json_payload_script_dict[match]);
+  let safe_attrs = "";
+  for (const [key2, value] of Object.entries(attrs)) {
+    if (value === void 0)
+      continue;
+    safe_attrs += ` sveltekit:data-${key2}=${escape_html_attr(value)}`;
   }
-  return result;
+  return `<script type="application/json"${safe_attrs}>${safe_payload}<\/script>`;
 }
 var escape_html_attr_dict = {
-  "<": "&lt;",
-  ">": "&gt;",
+  "&": "&amp;",
   '"': "&quot;"
 };
+var escape_html_attr_regex = new RegExp(`[${Object.keys(escape_html_attr_dict).join("")}]|[\\ud800-\\udbff](?![\\udc00-\\udfff])|[\\ud800-\\udbff][\\udc00-\\udfff]|[\\udc00-\\udfff]`, "g");
 function escape_html_attr(str) {
-  return '"' + escape3(str, escape_html_attr_dict, (code) => `&#${code};`) + '"';
+  const escaped_str = str.replace(escape_html_attr_regex, (match) => {
+    if (match.length === 2) {
+      return match;
+    }
+    return escape_html_attr_dict[match] ?? `&#${match.charCodeAt(0)};`;
+  });
+  return `"${escaped_str}"`;
 }
 var s2 = JSON.stringify;
 function create_prerendering_url_proxy(url) {
@@ -34881,9 +34887,8 @@ async function render_response({
   $session,
   page_config,
   status,
-  error: error2,
-  url,
-  params,
+  error: error2 = null,
+  event,
   resolve_opts,
   stuff
 }) {
@@ -34909,9 +34914,9 @@ async function render_response({
   if (resolve_opts.ssr) {
     branch.forEach(({ node, props: props2, loaded, fetched, uses_credentials }) => {
       if (node.css)
-        node.css.forEach((url2) => stylesheets.add(url2));
+        node.css.forEach((url) => stylesheets.add(url));
       if (node.js)
-        node.js.forEach((url2) => modulepreloads.add(url2));
+        node.js.forEach((url) => modulepreloads.add(url));
       if (node.styles)
         Object.entries(node.styles).forEach(([k, v]) => styles.set(k, v));
       if (fetched && page_config.hydrate)
@@ -34927,15 +34932,21 @@ async function render_response({
       stores: {
         page: writable(null),
         navigating: writable(null),
-        session,
+        session: __spreadProps(__spreadValues({}, session), {
+          subscribe: (fn) => {
+            is_private = true;
+            return session.subscribe(fn);
+          }
+        }),
         updated
       },
       page: {
-        url: state.prerender ? create_prerendering_url_proxy(url) : url,
-        params,
-        status,
         error: error2,
-        stuff
+        params: event.params,
+        routeId: event.routeId,
+        status,
+        stuff,
+        url: state.prerender ? create_prerendering_url_proxy(event.url) : event.url
       },
       components: branch.map(({ node }) => node.module.default)
     };
@@ -34952,17 +34963,7 @@ async function render_response({
     for (let i2 = 0; i2 < branch.length; i2 += 1) {
       props[`props_${i2}`] = await branch[i2].loaded.props;
     }
-    let session_tracking_active = false;
-    const unsubscribe = session.subscribe(() => {
-      if (session_tracking_active)
-        is_private = true;
-    });
-    session_tracking_active = true;
-    try {
-      rendered = options.root.render(props);
-    } finally {
-      unsubscribe();
-    }
+    rendered = options.root.render(props);
   } else {
     rendered = { head: "", html: "", css: { code: "", map: null } };
   }
@@ -34992,7 +34993,8 @@ async function render_response({
 				nodes: [
 					${(branch || []).map(({ node }) => `import(${s2(options.prefix + node.entry)})`).join(",\n						")}
 				],
-				params: ${devalue(params)}
+				params: ${devalue(event.params)},
+				routeId: ${s2(event.routeId)}
 			}` : "null"}
 		});
 	`;
@@ -35049,14 +35051,9 @@ ${rendered.css.code}`;
       }
       body += `
 		<script ${attributes.join(" ")}>${init_app}<\/script>`;
-      body += serialized_data.map(({ url: url2, body: body2, json }) => {
-        let attributes2 = `type="application/json" data-type="svelte-data" data-url=${escape_html_attr(url2)}`;
-        if (body2)
-          attributes2 += ` data-body="${hash(body2)}"`;
-        return `<script ${attributes2}>${json}<\/script>`;
-      }).join("\n	");
+      body += serialized_data.map(({ url, body: body2, response }) => render_json_payload_script({ type: "data", url, body: typeof body2 === "string" ? hash(body2) : void 0 }, response)).join("\n	");
       if (shadow_props) {
-        body += `<script type="application/json" data-type="svelte-props">${escape_json_in_html(shadow_props)}<\/script>`;
+        body += render_json_payload_script({ type: "props" }, shadow_props);
       }
     }
     if (options.service_worker) {
@@ -35065,7 +35062,7 @@ ${rendered.css.code}`;
 				<script${csp.script_needs_nonce ? ` nonce="${csp.nonce}"` : ""}>${init_service_worker}<\/script>`;
     }
   }
-  if (state.prerender) {
+  if (state.prerender && !options.amp) {
     const http_equiv = [];
     const csp_headers = csp.get_meta();
     if (csp_headers) {
@@ -35078,9 +35075,9 @@ ${rendered.css.code}`;
       head = http_equiv.join("\n") + head;
     }
   }
-  const segments = url.pathname.slice(options.paths.base.length).split("/").slice(2);
+  const segments = event.url.pathname.slice(options.paths.base.length).split("/").slice(2);
   const assets2 = options.paths.assets || (segments.length > 0 ? segments.map(() => "..").join("/") : ".");
-  const html = resolve_opts.transformPage({
+  const html = await resolve_opts.transformPage({
     html: options.template({ head, body, assets: assets2, nonce: csp.nonce })
   });
   const headers = new Headers({
@@ -35211,8 +35208,6 @@ async function load_node({
   options,
   state,
   route,
-  url,
-  params,
   node,
   $session,
   stuff,
@@ -35227,8 +35222,6 @@ async function load_node({
   let set_cookie_headers = [];
   let loaded;
   const shadow = is_leaf ? await load_shadow_data(route, event, options, !!state.prerender) : {};
-  if (shadow.fallthrough)
-    return;
   if (shadow.cookies) {
     set_cookie_headers.push(...shadow.cookies);
   }
@@ -35244,9 +35237,10 @@ async function load_node({
     };
   } else if (module2.load) {
     const load_input = {
-      url: state.prerender ? create_prerendering_url_proxy(url) : url,
-      params,
+      url: state.prerender ? create_prerendering_url_proxy(event.url) : event.url,
+      params: event.params,
       props: shadow.body || {},
+      routeId: event.routeId,
       get session() {
         uses_credentials = true;
         return $session;
@@ -35275,7 +35269,6 @@ async function load_node({
             opts.headers.set(key2, value);
           }
         }
-        opts.headers.set("referer", event.url.href);
         const resolved = resolve(event.url.pathname, requested.split("?")[0]);
         let response;
         let dependency;
@@ -35287,12 +35280,12 @@ async function load_node({
         if (is_asset || is_asset_html) {
           const file = is_asset ? filename : filename_html;
           if (options.read) {
-            const type = is_asset ? options.manifest._.mime[filename.slice(filename.lastIndexOf("."))] : "text/html";
+            const type = is_asset ? options.manifest.mimeTypes[filename.slice(filename.lastIndexOf("."))] : "text/html";
             response = new Response(options.read(file), {
               headers: type ? { "content-type": type } : {}
             });
           } else {
-            response = await fetch(`${url.origin}/${file}`, opts);
+            response = await fetch(`${event.url.origin}/${file}`, opts);
           }
         } else if (is_root_relative(resolved)) {
           if (opts.credentials !== "omit") {
@@ -35309,9 +35302,10 @@ async function load_node({
           if (opts.body && typeof opts.body !== "string") {
             throw new Error("Request body must be a string");
           }
-          response = await respond(new Request(new URL(requested, event.url).href, opts), options, {
-            fetched: requested,
-            initiator: route
+          response = await respond(new Request(new URL(requested, event.url).href, __spreadProps(__spreadValues({}, opts), { credentials: void 0 })), options, {
+            getClientAddress: state.getClientAddress,
+            initiator: route,
+            prerender: state.prerender
           });
           if (state.prerender) {
             dependency = { response, body: null };
@@ -35350,7 +35344,12 @@ async function load_node({
                 fetched.push({
                   url: requested,
                   body: opts.body,
-                  json: `{"status":${status_number},"statusText":${s2(response2.statusText)},"headers":${s2(headers)},"body":${escape_json_in_html(body)}}`
+                  response: {
+                    status: status_number,
+                    statusText: response2.statusText,
+                    headers,
+                    body
+                  }
                 });
               }
               if (dependency) {
@@ -35397,6 +35396,9 @@ async function load_node({
     if (!loaded) {
       throw new Error(`load function must return a value${options.dev ? ` (${node.entry})` : ""}`);
     }
+    if (loaded.fallthrough) {
+      throw new Error("fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching");
+    }
   } else if (shadow.body) {
     loaded = {
       props: shadow.body
@@ -35404,11 +35406,8 @@ async function load_node({
   } else {
     loaded = {};
   }
-  if (loaded.fallthrough && !is_error) {
-    return;
-  }
   if (shadow.body && state.prerender) {
-    const pathname = `${event.url.pathname}/__data.json`;
+    const pathname = `${event.url.pathname.replace(/\/$/, "")}/__data.json`;
     const dependency = {
       response: new Response(void 0),
       body: JSON.stringify(shadow.body)
@@ -35449,8 +35448,9 @@ async function load_shadow_data(route, event, options, prerender) {
     };
     if (!is_get) {
       const result = await handler(event);
-      if (result.fallthrough)
-        return result;
+      if (result.fallthrough) {
+        throw new Error("fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching");
+      }
       const { status, headers, body } = validate_shadow_output(result);
       data.status = status;
       add_cookies(data.cookies, headers);
@@ -35463,8 +35463,9 @@ async function load_shadow_data(route, event, options, prerender) {
     const get = method === "head" && mod.head || mod.get;
     if (get) {
       const result = await get(event);
-      if (result.fallthrough)
-        return result;
+      if (result.fallthrough) {
+        throw new Error("fallthrough is no longer supported. Use matchers instead: https://kit.svelte.dev/docs/routing#advanced-routing-matching");
+      }
       const { status, headers, body } = validate_shadow_output(result);
       add_cookies(data.cookies, headers);
       data.status = status;
@@ -35523,37 +35524,38 @@ async function respond_with_error({
   resolve_opts
 }) {
   try {
-    const default_layout = await options.manifest._.nodes[0]();
-    const default_error = await options.manifest._.nodes[1]();
-    const params = {};
-    const layout_loaded = await load_node({
-      event,
-      options,
-      state,
-      route: null,
-      url: event.url,
-      params,
-      node: default_layout,
-      $session,
-      stuff: {},
-      is_error: false,
-      is_leaf: false
-    });
-    const error_loaded = await load_node({
-      event,
-      options,
-      state,
-      route: null,
-      url: event.url,
-      params,
-      node: default_error,
-      $session,
-      stuff: layout_loaded ? layout_loaded.stuff : {},
-      is_error: true,
-      is_leaf: false,
-      status,
-      error: error2
-    });
+    const branch = [];
+    let stuff = {};
+    if (resolve_opts.ssr) {
+      const default_layout = await options.manifest._.nodes[0]();
+      const default_error = await options.manifest._.nodes[1]();
+      const layout_loaded = await load_node({
+        event,
+        options,
+        state,
+        route: null,
+        node: default_layout,
+        $session,
+        stuff: {},
+        is_error: false,
+        is_leaf: false
+      });
+      const error_loaded = await load_node({
+        event,
+        options,
+        state,
+        route: null,
+        node: default_error,
+        $session,
+        stuff: layout_loaded ? layout_loaded.stuff : {},
+        is_error: true,
+        is_leaf: false,
+        status,
+        error: error2
+      });
+      branch.push(layout_loaded, error_loaded);
+      stuff = error_loaded.stuff;
+    }
     return await render_response({
       options,
       state,
@@ -35562,12 +35564,11 @@ async function respond_with_error({
         hydrate: options.hydrate,
         router: options.router
       },
-      stuff: error_loaded.stuff,
+      stuff,
       status,
       error: error2,
-      branch: [layout_loaded, error_loaded],
-      url: event.url,
-      params,
+      branch,
+      event,
       resolve_opts
     });
   } catch (err) {
@@ -35589,12 +35590,13 @@ async function respond$1(opts) {
         router: true
       },
       status: 200,
-      url: event.url,
+      error: null,
+      event,
       stuff: {}
     }));
   }
   try {
-    nodes = await Promise.all(route.a.map((n) => options.manifest._.nodes[n] && options.manifest._.nodes[n]()));
+    nodes = await Promise.all(route.a.map((n) => n == void 0 ? n : options.manifest._.nodes[n]()));
   } catch (err) {
     const error3 = coalesce_to_error(err);
     options.handle_error(error3, event);
@@ -35610,14 +35612,17 @@ async function respond$1(opts) {
   }
   const leaf = nodes[nodes.length - 1].module;
   let page_config = get_page_config(leaf, options);
-  if (!leaf.prerender && state.prerender && !state.prerender.all) {
-    return new Response(void 0, {
-      status: 204
-    });
+  if (state.prerender) {
+    const should_prerender = leaf.prerender ?? state.prerender.default;
+    if (!should_prerender) {
+      return new Response(void 0, {
+        status: 204
+      });
+    }
   }
   let branch = [];
   let status = 200;
-  let error2;
+  let error2 = null;
   let set_cookie_headers = [];
   let stuff = {};
   ssr:
@@ -35628,14 +35633,11 @@ async function respond$1(opts) {
         if (node) {
           try {
             loaded = await load_node(__spreadProps(__spreadValues({}, opts), {
-              url: event.url,
               node,
               stuff,
               is_error: false,
               is_leaf: i2 === nodes.length - 1
             }));
-            if (!loaded)
-              return;
             set_cookie_headers = set_cookie_headers.concat(loaded.set_cookie_headers);
             if (loaded.loaded.redirect) {
               return with_cookies(new Response(void 0, {
@@ -35660,7 +35662,8 @@ async function respond$1(opts) {
           if (error2) {
             while (i2--) {
               if (route.b[i2]) {
-                const error_node = await options.manifest._.nodes[route.b[i2]]();
+                const index = route.b[i2];
+                const error_node = await options.manifest._.nodes[index]();
                 let node_loaded;
                 let j = i2;
                 while (!(node_loaded = branch[j])) {
@@ -35668,7 +35671,6 @@ async function respond$1(opts) {
                 }
                 try {
                   const error_loaded = await load_node(__spreadProps(__spreadValues({}, opts), {
-                    url: event.url,
                     node: error_node,
                     stuff: node_loaded.stuff,
                     is_error: true,
@@ -35709,7 +35711,7 @@ async function respond$1(opts) {
   try {
     return with_cookies(await render_response(__spreadProps(__spreadValues({}, opts), {
       stuff,
-      url: event.url,
+      event,
       page_config,
       status,
       error: error2,
@@ -35757,23 +35759,14 @@ async function render_page(event, route, options, state, resolve_opts) {
     }
   }
   const $session = await options.hooks.getSession(event);
-  const response = await respond$1({
+  return respond$1({
     event,
     options,
     state,
     $session,
     resolve_opts,
-    route,
-    params: event.params
+    route
   });
-  if (response) {
-    return response;
-  }
-  if (state.fetched) {
-    return new Response(`Bad request in load function: failed to fetch ${state.fetched}`, {
-      status: 500
-    });
-  }
 }
 function negotiate(accept, types2) {
   const parts = accept.split(",").map((str, i2) => {
@@ -35807,22 +35800,39 @@ function negotiate(accept, types2) {
   }
   return accepted;
 }
+function exec(match, names, types2, matchers) {
+  const params = {};
+  for (let i2 = 0; i2 < names.length; i2 += 1) {
+    const name = names[i2];
+    const type = types2[i2];
+    const value = match[i2 + 1] || "";
+    if (type) {
+      const matcher = matchers[type];
+      if (!matcher)
+        throw new Error(`Missing "${type}" param matcher`);
+      if (!matcher(value))
+        return;
+    }
+    params[name] = value;
+  }
+  return params;
+}
 var DATA_SUFFIX = "/__data.json";
 var default_transform = ({ html }) => html;
-async function respond(request, options, state = {}) {
-  var _a4;
-  const url = new URL(request.url);
+async function respond(request, options, state) {
+  var _a4, _b, _c;
+  let url = new URL(request.url);
   const normalized = normalize_path(url.pathname, options.trailing_slash);
-  if (normalized !== url.pathname) {
+  if (normalized !== url.pathname && !((_a4 = state.prerender) == null ? void 0 : _a4.fallback)) {
     return new Response(void 0, {
       status: 301,
       headers: {
-        location: normalized + (url.search === "?" ? "" : url.search)
+        location: (normalized.startsWith("//") ? url.origin + normalized : normalized) + (url.search === "?" ? "" : url.search)
       }
     });
   }
   const { parameter, allowed } = options.method_override;
-  const method_override = (_a4 = url.searchParams.get(parameter)) == null ? void 0 : _a4.toUpperCase();
+  const method_override = (_b = url.searchParams.get(parameter)) == null ? void 0 : _b.toUpperCase();
   if (method_override) {
     if (request.method === "POST") {
       if (allowed.includes(method_override)) {
@@ -35844,12 +35854,51 @@ async function respond(request, options, state = {}) {
       throw new Error(`${parameter}=${method_override} is only allowed with POST requests`);
     }
   }
+  let decoded = decodeURI(url.pathname);
+  let route = null;
+  let params = {};
+  if (options.paths.base && !((_c = state.prerender) == null ? void 0 : _c.fallback)) {
+    if (!decoded.startsWith(options.paths.base)) {
+      return new Response(void 0, { status: 404 });
+    }
+    decoded = decoded.slice(options.paths.base.length) || "/";
+  }
+  const is_data_request = decoded.endsWith(DATA_SUFFIX);
+  if (is_data_request) {
+    decoded = decoded.slice(0, -DATA_SUFFIX.length) || "/";
+    const normalized2 = normalize_path(url.pathname.slice(0, -DATA_SUFFIX.length), options.trailing_slash);
+    url = new URL(url.origin + normalized2 + url.search);
+  }
+  if (!state.prerender || !state.prerender.fallback) {
+    const matchers = await options.manifest._.matchers();
+    for (const candidate of options.manifest._.routes) {
+      const match = candidate.pattern.exec(decoded);
+      if (!match)
+        continue;
+      const matched = exec(match, candidate.names, candidate.types, matchers);
+      if (matched) {
+        route = candidate;
+        params = decode_params(matched);
+        break;
+      }
+    }
+  }
   const event = {
-    request,
-    url,
-    params: {},
+    get clientAddress() {
+      if (!state.getClientAddress) {
+        throw new Error(`${"@sveltejs/adapter-vercel"} does not specify getClientAddress. Please raise an issue`);
+      }
+      Object.defineProperty(event, "clientAddress", {
+        value: state.getClientAddress()
+      });
+      return event.clientAddress;
+    },
     locals: {},
-    platform: state.platform
+    params,
+    platform: state.platform,
+    request,
+    routeId: route && route.id,
+    url
   };
   const removed = (property, replacement, suffix = "") => ({
     get: () => {
@@ -35887,60 +35936,35 @@ async function respond(request, options, state = {}) {
         }
         if (state.prerender && state.prerender.fallback) {
           return await render_response({
-            url: event2.url,
-            params: event2.params,
+            event: event2,
             options,
             state,
             $session: await options.hooks.getSession(event2),
             page_config: { router: true, hydrate: true },
             stuff: {},
             status: 200,
+            error: null,
             branch: [],
             resolve_opts: __spreadProps(__spreadValues({}, resolve_opts), {
               ssr: false
             })
           });
         }
-        let decoded = decodeURI(event2.url.pathname);
-        if (options.paths.base) {
-          if (!decoded.startsWith(options.paths.base)) {
-            return new Response(void 0, { status: 404 });
-          }
-          decoded = decoded.slice(options.paths.base.length) || "/";
-        }
-        const is_data_request = decoded.endsWith(DATA_SUFFIX);
-        if (is_data_request) {
-          decoded = decoded.slice(0, -DATA_SUFFIX.length) || "/";
-          const normalized2 = normalize_path(url.pathname.slice(0, -DATA_SUFFIX.length), options.trailing_slash);
-          event2.url = new URL(event2.url.origin + normalized2 + event2.url.search);
-        }
-        for (const route of options.manifest._.routes) {
-          const match = route.pattern.exec(decoded);
-          if (!match)
-            continue;
-          event2.params = route.params ? decode_params(route.params(match)) : {};
+        if (route) {
           let response2;
           if (is_data_request && route.type === "page" && route.shadow) {
             response2 = await render_endpoint(event2, await route.shadow());
-            if (request.headers.get("x-sveltekit-load") === "true") {
-              if (response2) {
-                if (response2.status >= 300 && response2.status < 400) {
-                  const location = response2.headers.get("location");
-                  if (location) {
-                    const headers = new Headers(response2.headers);
-                    headers.set("x-sveltekit-location", location);
-                    response2 = new Response(void 0, {
-                      status: 204,
-                      headers
-                    });
-                  }
+            if (request.headers.has("x-sveltekit-load")) {
+              if (response2.status >= 300 && response2.status < 400) {
+                const location = response2.headers.get("location");
+                if (location) {
+                  const headers = new Headers(response2.headers);
+                  headers.set("x-sveltekit-location", location);
+                  response2 = new Response(void 0, {
+                    status: 204,
+                    headers
+                  });
                 }
-              } else {
-                response2 = new Response("{}", {
-                  headers: {
-                    "content-type": "application/json"
-                  }
-                });
               }
             }
           } else {
@@ -35987,6 +36011,9 @@ async function respond(request, options, state = {}) {
             resolve_opts
           });
         }
+        if (state.prerender) {
+          return new Response("not found", { status: 404 });
+        }
         return await fetch(request);
       },
       get request() {
@@ -36025,22 +36052,11 @@ function set_paths(paths) {
   base = paths.base;
   assets = paths.assets || base;
 }
-var user_hooks = /* @__PURE__ */ Object.freeze({
-  __proto__: null,
-  [Symbol.toStringTag]: "Module"
-});
 var template = ({ head, body, assets: assets2, nonce }) => '<!DOCTYPE html>\n<html lang="en">\n	<head>\n		<meta charset="utf-8" />\n		<link rel="icon" href="' + assets2 + '/rocket.ico" />\n		<meta name="viewport" content="width=device-width, initial-scale=1" />\n		' + head + '\n	</head>\n	<body class="bg-black">\n		<div>' + body + "</div>\n	</body>\n</html>\n";
 var read = null;
 set_paths({ "base": "", "assets": "" });
-var get_hooks = (hooks) => ({
-  getSession: hooks.getSession || (() => ({})),
-  handle: hooks.handle || (({ event, resolve: resolve2 }) => resolve2(event)),
-  handleError: hooks.handleError || (({ error: error2 }) => console.error(error2.stack)),
-  externalFetch: hooks.externalFetch || fetch
-});
-var App = class {
+var Server = class {
   constructor(manifest2) {
-    const hooks = get_hooks(user_hooks);
     this.options = {
       amp: false,
       csp: { "mode": "auto", "directives": { "upgrade-insecure-requests": false, "block-all-mixed-content": false } },
@@ -36048,7 +36064,7 @@ var App = class {
       floc: false,
       get_stack: (error2) => String(error2),
       handle_error: (error2, event) => {
-        hooks.handleError({
+        this.options.hooks.handleError({
           error: error2,
           event,
           get request() {
@@ -36057,7 +36073,7 @@ var App = class {
         });
         error2.stack = this.options.get_stack(error2);
       },
-      hooks,
+      hooks: null,
       hydrate: true,
       manifest: manifest2,
       method_override: { "parameter": "_method", "allowed": [] },
@@ -36073,9 +36089,18 @@ var App = class {
       trailing_slash: "never"
     };
   }
-  render(request, options = {}) {
+  async respond(request, options = {}) {
     if (!(request instanceof Request)) {
-      throw new Error("The first argument to app.render must be a Request object. See https://github.com/sveltejs/kit/pull/3384 for details");
+      throw new Error("The first argument to server.respond must be a Request object. See https://github.com/sveltejs/kit/pull/3384 for details");
+    }
+    if (!this.options.hooks) {
+      const module2 = await Promise.resolve().then(() => (init_hooks_1c45ba0b(), hooks_1c45ba0b_exports));
+      this.options.hooks = {
+        getSession: module2.getSession || (() => ({})),
+        handle: module2.handle || (({ event, resolve: resolve2 }) => resolve2(event)),
+        handleError: module2.handleError || (({ error: error2 }) => console.error(error2.stack)),
+        externalFetch: module2.externalFetch || fetch
+      };
     }
     return respond(request, this.options, options);
   }
@@ -36084,10 +36109,10 @@ var App = class {
 // .svelte-kit/vercel-tmp/manifest.js
 var manifest = {
   appDir: "_app",
-  assets: /* @__PURE__ */ new Set(["desk.gltf", "fonts/sf-pro.woff2", "mandle-preview.png", "mrvf-preview.png", "otter-preview.png", "rocket.ico"]),
+  assets: /* @__PURE__ */ new Set([".DS_Store", "desk.gltf", "fonts/sf-pro.woff2", "mandle-preview.png", "mrvf-preview.png", "otter-preview.png", "rocket.ico"]),
+  mimeTypes: { ".gltf": "model/gltf+json", ".woff2": "font/woff2", ".png": "image/png", ".ico": "image/vnd.microsoft.icon" },
   _: {
-    mime: { ".gltf": "model/gltf+json", ".woff2": "font/woff2", ".png": "image/png", ".ico": "image/vnd.microsoft.icon" },
-    entry: { "file": "start-e4f52f99.js", "js": ["start-e4f52f99.js", "chunks/vendor-f856dcc3.js"], "css": ["assets/vendor-63b1e0e2.css"] },
+    entry: { "file": "start-76943a9e.js", "js": ["start-76943a9e.js", "chunks/index-e3e25309.js", "chunks/index-643b1cd2.js"], "css": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),
@@ -36098,8 +36123,10 @@ var manifest = {
     routes: [
       {
         type: "page",
+        id: "",
         pattern: /^\/$/,
-        params: null,
+        names: [],
+        types: [],
         path: "/",
         shadow: null,
         a: [0, 2],
@@ -36107,8 +36134,10 @@ var manifest = {
       },
       {
         type: "page",
+        id: "portfolio",
         pattern: /^\/portfolio\/?$/,
-        params: null,
+        names: [],
+        types: [],
         path: "/portfolio",
         shadow: null,
         a: [0, 3],
@@ -36116,19 +36145,24 @@ var manifest = {
       },
       {
         type: "page",
+        id: "skillset",
         pattern: /^\/skillset\/?$/,
-        params: null,
+        names: [],
+        types: [],
         path: "/skillset",
         shadow: null,
         a: [0, 4],
         b: [1]
       }
-    ]
+    ],
+    matchers: async () => {
+      return {};
+    }
   }
 };
 
 // .svelte-kit/vercel-tmp/entry.js
-var app = new App(manifest);
+var server = new Server(manifest);
 var entry_default = async (req, res) => {
   let request;
   try {
@@ -36137,9 +36171,12 @@ var entry_default = async (req, res) => {
     res.statusCode = err.status || 400;
     return res.end(err.reason || "Invalid request body");
   }
-  setResponse(res, await app.render(request));
+  setResponse(res, await server.respond(request, {
+    getClientAddress() {
+      return request.headers.get("x-forwarded-for");
+    }
+  }));
 };
-module.exports = __toCommonJS(entry_exports);
 // Annotate the CommonJS export names for ESM import in node:
 0 && (module.exports = {});
 /*! fetch-blob. MIT License. Jimmy Wärting <https://jimmy.warting.se/opensource> */
