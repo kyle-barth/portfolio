@@ -5407,7 +5407,7 @@ var init_install_fetch = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/index-c4568e5c.js
+// .svelte-kit/output/server/chunks/index-30809a8c.js
 function noop2() {
 }
 function run(fn) {
@@ -5528,8 +5528,8 @@ function add_attribute(name, value, boolean) {
   return ` ${name}${assignment}`;
 }
 var current_component, escaped, missing_component, on_destroy;
-var init_index_c4568e5c = __esm({
-  ".svelte-kit/output/server/chunks/index-c4568e5c.js"() {
+var init_index_30809a8c = __esm({
+  ".svelte-kit/output/server/chunks/index-30809a8c.js"() {
     Promise.resolve();
     escaped = {
       '"': "&quot;",
@@ -5559,7 +5559,7 @@ __export(layout_svelte_exports, {
 var getStores, page, Seo, css, _layout;
 var init_layout_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/__layout.svelte.js"() {
-    init_index_c4568e5c();
+    init_index_30809a8c();
     getStores = () => {
       const stores = getContext("__svelte__");
       return {
@@ -5635,7 +5635,7 @@ function load({ error: error2, status }) {
 var Error2;
 var init_error_svelte = __esm({
   ".svelte-kit/output/server/entries/fallbacks/error.svelte.js"() {
-    init_index_c4568e5c();
+    init_index_30809a8c();
     Error2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
       let { status } = $$props;
       let { error: error2 } = $$props;
@@ -33209,7 +33209,7 @@ function lightStore() {
 var Lightbulb, ROOT, PARENT, css$2, Canvas, position, rotation, scale, Primitive, PerspectiveCamera_1, OrbitControls_1, AmbientLight2, PointLight2, subscriber_queue2, deskLoaded, Desk, initCameraPos, camera, Camera2, initValue, genRandColor, genRandIntensity, light, Lighting, css$1, Scene2, css4, Routes;
 var init_index_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/index.svelte.js"() {
-    init_index_c4568e5c();
+    init_index_30809a8c();
     init_three_module();
     init_three_module();
     init_OrbitControls();
@@ -33833,11 +33833,11 @@ var init__3 = __esm({
   }
 });
 
-// .svelte-kit/output/server/chunks/Container-70e2743f.js
+// .svelte-kit/output/server/chunks/Container-d9c0fdba.js
 var css6, Container;
-var init_Container_70e2743f = __esm({
-  ".svelte-kit/output/server/chunks/Container-70e2743f.js"() {
-    init_index_c4568e5c();
+var init_Container_d9c0fdba = __esm({
+  ".svelte-kit/output/server/chunks/Container-d9c0fdba.js"() {
+    init_index_30809a8c();
     css6 = {
       code: ".container.svelte-1mtz99z{margin:auto;max-width:48rem;padding-top:1.25rem;padding-bottom:1.25rem;padding-left:1.25rem;padding-right:1.25rem\n}@media(min-width: 640px){.container.svelte-1mtz99z{padding-top:5rem;padding-bottom:5rem\n    }}",
       map: null
@@ -33857,11 +33857,41 @@ var portfolio_svelte_exports = {};
 __export(portfolio_svelte_exports, {
   default: () => Portfolio
 });
-var css$12, Cards, css7, Portfolio;
+var css$22, Image2, css$12, Cards, css7, Portfolio;
 var init_portfolio_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/portfolio.svelte.js"() {
-    init_index_c4568e5c();
-    init_Container_70e2743f();
+    init_index_30809a8c();
+    init_Container_d9c0fdba();
+    css$22 = {
+      code: "img.svelte-14she5{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms;transition-timing-function:cubic-bezier(0.4, 0, 1, 1)\n}",
+      map: null
+    };
+    Image2 = create_ssr_component(($$result, $$props, $$bindings, slots) => {
+      let { alt } = $$props;
+      let { src } = $$props;
+      let { width = "" } = $$props;
+      let { height = "" } = $$props;
+      let { classes = "" } = $$props;
+      let { loading: loading2 = "" } = $$props;
+      let imgEl;
+      if ($$props.alt === void 0 && $$bindings.alt && alt !== void 0)
+        $$bindings.alt(alt);
+      if ($$props.src === void 0 && $$bindings.src && src !== void 0)
+        $$bindings.src(src);
+      if ($$props.width === void 0 && $$bindings.width && width !== void 0)
+        $$bindings.width(width);
+      if ($$props.height === void 0 && $$bindings.height && height !== void 0)
+        $$bindings.height(height);
+      if ($$props.classes === void 0 && $$bindings.classes && classes !== void 0)
+        $$bindings.classes(classes);
+      if ($$props.loading === void 0 && $$bindings.loading && loading2 !== void 0)
+        $$bindings.loading(loading2);
+      $$result.css.add(css$22);
+      return `
+
+
+<img${add_attribute("id", "lazy-img-" + src, 0)}${add_attribute("alt", alt, 0)}${add_attribute("width", width, 0)}${add_attribute("height", height, 0)}${add_attribute("loading", loading2, 0)}${add_attribute("style", `width: ${width}px; height: ${height}px`, 0)} class="${escape2(null_to_empty("opacity-0 " + classes)) + " svelte-14she5"}" decoding="${"async"}" onload="${"window['lazyImgFadeIn'](this.id)"}"${add_attribute("this", imgEl, 0)}>`;
+    });
     css$12 = {
       code: ".card.svelte-789dby{display:flex;flex-direction:column;overflow:hidden;border-radius:0.75rem;border-width:2px;--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity));--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)\n}.button.svelte-789dby{border-radius:0.375rem;border-width:2px;--tw-border-opacity:1;border-color:rgb(255 255 255 / var(--tw-border-opacity));background-color:rgb(255 255 255 / var(--tw-bg-opacity));--tw-bg-opacity:0.2;padding-left:0.5rem;padding-right:0.5rem\n}.button.svelte-789dby:hover{--tw-bg-opacity:0.3\n}",
       map: null
@@ -33898,7 +33928,13 @@ var init_portfolio_svelte = __esm({
       ];
       $$result.css.add(css$12);
       return `<div class="${"flex flex-wrap pt-10"}">${each(portfolioCards, (portfolioCard, i2) => {
-        return `<div class="${escape2(null_to_empty(i2 === portfolioCards.length - 1 ? "card" : "card mb-10")) + " svelte-789dby"}"><a class="${"z-10"}"${add_attribute("href", portfolioCard.url, 0)} target="${"_blank"}"><img${add_attribute("id", "img" + i2, 0)} width="${"724px"}" height="${"452.5px"}" decoding="${"async"}" class="${"-z-50 opacity-0 transition-all sm:hover:scale-105"}"${add_attribute("src", (() => portfolioCard.img.url)(), 0)}${add_attribute("alt", portfolioCard.img.alt, 0)}></a>
+        return `<div class="${escape2(null_to_empty(i2 === portfolioCards.length - 1 ? "card" : "card mb-10")) + " svelte-789dby"}"><a class="${"z-10"}"${add_attribute("href", portfolioCard.url, 0)} target="${"_blank"}">${validate_component(Image2, "Image").$$render($$result, {
+          width: "724px",
+          height: "452.5px",
+          classes: "-z-50 transition-all sm:hover:scale-105",
+          src: portfolioCard.img.url,
+          alt: portfolioCard.img.alt
+        }, {}, {})}</a>
 
 			<div class="${"z-30 bg-gray-800 p-5"}"><div class="${"flex flex-row items-center justify-between pb-5 text-3xl"}"><h1>${escape2(portfolioCard.name)}</h1>
 					<a class="${"button glassmorphic text-lg svelte-789dby"}"${add_attribute("href", portfolioCard.url, 0)} target="${"_blank"}">link \u2192</a></div>
@@ -33941,9 +33977,9 @@ var entry4, js4, css8;
 var init__4 = __esm({
   ".svelte-kit/output/server/nodes/3.js"() {
     init_portfolio_svelte();
-    entry4 = "pages/portfolio.svelte-43a48a7f.js";
-    js4 = ["pages/portfolio.svelte-43a48a7f.js", "chunks/index-e3e25309.js", "chunks/Container-ee799066.js", "chunks/index-10c503ec.js"];
-    css8 = ["assets/pages/portfolio.svelte-e91076aa.css", "assets/Container-3f760c47.css"];
+    entry4 = "pages/portfolio.svelte-3d2e18eb.js";
+    js4 = ["pages/portfolio.svelte-3d2e18eb.js", "chunks/index-e3e25309.js", "chunks/Container-ee799066.js", "chunks/index-10c503ec.js"];
+    css8 = ["assets/pages/portfolio.svelte-1ca6ca3e.css", "assets/Container-3f760c47.css"];
   }
 });
 
@@ -33955,8 +33991,8 @@ __export(skillset_svelte_exports, {
 var css9, Skillset;
 var init_skillset_svelte = __esm({
   ".svelte-kit/output/server/entries/pages/skillset.svelte.js"() {
-    init_index_c4568e5c();
-    init_Container_70e2743f();
+    init_index_30809a8c();
+    init_Container_d9c0fdba();
     css9 = {
       code: ".spacing.svelte-1j159lx .svelte-1j159lx{padding-bottom:1.25rem\n}h2.svelte-1j159lx.svelte-1j159lx{font-size:1.25rem;line-height:1.75rem;font-weight:700\n}h3.svelte-1j159lx.svelte-1j159lx{font-size:1.125rem;line-height:1.75rem;font-weight:700\n}ul.svelte-1j159lx.svelte-1j159lx{list-style-position:inside;list-style-type:disc;padding-bottom:0.5rem\n}li.svelte-1j159lx.svelte-1j159lx{padding-left:1.25rem\n}",
       map: null
@@ -34115,7 +34151,7 @@ async function setResponse(res, response) {
 }
 
 // .svelte-kit/output/server/index.js
-init_index_c4568e5c();
+init_index_30809a8c();
 var __accessCheck2 = (obj, member, msg) => {
   if (!member.has(obj))
     throw TypeError("Cannot " + msg);
@@ -36112,7 +36148,7 @@ var manifest = {
   assets: /* @__PURE__ */ new Set([".DS_Store", "desk.gltf", "fonts/sf-pro.woff2", "mandle-preview.png", "mrvf-preview.png", "otter-preview.png", "rocket.ico"]),
   mimeTypes: { ".gltf": "model/gltf+json", ".woff2": "font/woff2", ".png": "image/png", ".ico": "image/vnd.microsoft.icon" },
   _: {
-    entry: { "file": "start-76943a9e.js", "js": ["start-76943a9e.js", "chunks/index-e3e25309.js", "chunks/index-643b1cd2.js"], "css": [] },
+    entry: { "file": "start-3a343aa8.js", "js": ["start-3a343aa8.js", "chunks/index-e3e25309.js", "chunks/index-643b1cd2.js"], "css": [] },
     nodes: [
       () => Promise.resolve().then(() => (init__(), __exports)),
       () => Promise.resolve().then(() => (init__2(), __exports2)),

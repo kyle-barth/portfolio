@@ -1,6 +1,7 @@
 {
 	"name": "portfolio-svelte-cubed",
 	"version": "0.0.1",
+	"license": "UNLICENSED",
 	"scripts": {
 		"dev": "svelte-kit dev",
 		"build": "svelte-kit build",
